@@ -37,11 +37,11 @@ class SignUpView extends GetView<AuthController> {
               Gaps.kheight40,
               const Text(
                 "Sign up",
-                style: filterAppbarStyle,
+                style: headingStyle,
               ),
               const Text(
                 "Fill you details",
-                style: previewHeadingStyle,
+                style: subheadingStyle,
               ),
               Gaps.kheight20,
               CustomInputField(
@@ -141,7 +141,7 @@ class SignUpView extends GetView<AuthController> {
                 },
                 child: const Text(
                   "Already have account? Login up",
-                  style: previewHeadingStyle,
+                  style: subheadingStyle,
                 ),
               ),
             ],

@@ -32,7 +32,7 @@ class PrimaryButton extends StatelessWidget {
       child: Container(
         height: height ?? 50,
         decoration: BoxDecoration(
-          color: isWhiteColor ? greyColor : primaryColor,
+          color: isWhiteColor ? greyColor : btnColor,
           borderRadius: BorderRadius.circular(4),
         ),
         child: Center(
@@ -55,7 +55,7 @@ class PrimaryButton extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 18,
-                        color: textColor ?? whiteColor,
+                        color: textColor ?? backgroundColor,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -98,7 +98,7 @@ class PrimaryButton2 extends StatelessWidget {
                   height: 40,
                   child: LoadingIndicator(
                     indicatorType: Indicator.ballPulse,
-                    colors: [primaryColor],
+                    colors: [btnColor],
                     strokeWidth: 2,
                   ),
                 )
@@ -109,7 +109,7 @@ class PrimaryButton2 extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 20,
-                      color: primaryColor,
+                      color: btnColor,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -138,7 +138,7 @@ class DialogActionFilledButton extends StatelessWidget {
     return FilledButton.tonal(
       onPressed: onPressed,
       style: FilledButton.styleFrom(
-        backgroundColor: backgroundColor ?? primaryColor,
+        backgroundColor: backgroundColor ?? btnColor,
         foregroundColor: foregroundColor,
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(

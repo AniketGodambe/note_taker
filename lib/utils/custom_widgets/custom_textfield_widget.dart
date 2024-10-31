@@ -102,13 +102,14 @@ class CustomInputField extends StatelessWidget {
                       }
                       return null;
                     }),
-          style: const TextStyle(
-            color: Color(0xff4E4D4D),
+          style: TextStyle(
+            color: whiteColor.withOpacity(0.8),
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
+            hoverColor: whiteColor,
             suffixIcon: suffixIcon,
             counterText: isCounttextRequired ? null : "",
             errorMaxLines: 1,
@@ -133,12 +134,12 @@ class CustomInputField extends StatelessWidget {
             ),
             errorBorder: OutlineInputBorder(
               borderSide:
-                  BorderSide(color: Colors.red.withOpacity(0.3), width: 1),
+                  BorderSide(color: Colors.red.withOpacity(0.7), width: 1),
               borderRadius: BorderRadius.circular(6),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderSide:
-                  BorderSide(color: Colors.red.withOpacity(0.3), width: 1),
+                  BorderSide(color: Colors.red.withOpacity(0.7), width: 1),
               borderRadius: BorderRadius.circular(6),
             ),
             errorStyle: const TextStyle(fontSize: 12, color: Colors.red),

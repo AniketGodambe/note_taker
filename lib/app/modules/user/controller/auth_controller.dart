@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:note_taker/utils/app_preferences.dart';
 
 import '../../../../routes.dart';
+import '../../../../utils/custom_widgets/colors_const.dart';
 import '../models/user_details.dart';
 
 class AuthController extends GetxController {
@@ -32,11 +33,14 @@ class AuthController extends GetxController {
         if (fromSreen == "splash") {
           Get.offAllNamed(Routes.loginView);
         } else {
-          Get.snackbar("Error", "Incorect Credentials");
+          Get.snackbar("Error", "Incorect Credentials",
+              colorText: whiteColor,
+              backgroundColor: redColor.withOpacity(0.6));
         }
       }
     } else {
-      Get.snackbar("Error", "User dons't exitst!");
+      Get.snackbar("Error", "User dons't exitst!",
+          colorText: whiteColor, backgroundColor: redColor.withOpacity(0.6));
     }
   }
 }

@@ -21,8 +21,6 @@ class LoginView extends GetView<AuthController> {
           onTap: () {
             if (controller.loginFormKey.currentState!.validate()) {
               controller.checkUserCreds();
-            } else {
-              Get.snackbar("Error", "Please enter username & password");
             }
           },
           title: 'Login',
@@ -38,11 +36,11 @@ class LoginView extends GetView<AuthController> {
             children: [
               const Text(
                 "Please Login",
-                style: filterAppbarStyle,
+                style: headingStyle,
               ),
               const Text(
                 "Using your username and password",
-                style: previewHeadingStyle,
+                style: subheadingStyle,
               ),
               Gaps.kheight30,
               CustomInputField(
@@ -78,7 +76,7 @@ class LoginView extends GetView<AuthController> {
                 },
                 child: const Text(
                   "Don't have account? Sign up",
-                  style: previewHeadingStyle,
+                  style: subheadingStyle,
                 ),
               ),
             ],
