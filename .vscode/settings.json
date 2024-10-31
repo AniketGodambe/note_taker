@@ -1,0 +1,6 @@
+{
+    "dart.flutterSdkPath": "~/Development/flutter2",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    }
+}
