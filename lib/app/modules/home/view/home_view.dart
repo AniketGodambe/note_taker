@@ -30,6 +30,20 @@ class HomeView extends GetView<HomeViewController> {
               ))
         ],
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: 30,
+          top: 10,
+        ),
+        child: PrimaryButton(
+          onTap: () {
+            Get.toNamed(Routes.addEditNotes);
+          },
+          title: "Add Note",
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Obx(() {
@@ -41,12 +55,43 @@ class HomeView extends GetView<HomeViewController> {
                   children: [
                     userDetailsCard(),
                     Gaps.kheight40,
-                    PrimaryButton(
-                      onTap: () {
-                        Get.toNamed(Routes.addEditNotes);
-                      },
-                      title: "Add Note",
-                    )
+                    controller.addEditNote.value
+                        ? const CircularProgressIndicator.adaptive()
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.getAllNotes.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 15),
+                                padding: const EdgeInsets.all(16),
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: whiteColor,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${controller.getAllNotes[index].title}",
+                                      style: headingBlackstyle,
+                                    ),
+                                    Gaps.kheight10,
+                                    Text(
+                                      "Priority : ${controller.getAllNotes[index].priority}",
+                                      style: headingBlackstyle,
+                                    ),
+                                    Gaps.kheight5,
+                                    Text(
+                                      controller.getAllNotes[index].details
+                                          .toString(),
+                                      style: headingBlackstyle,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                   ],
                 );
         }),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:note_taker/utils/app_preferences.dart';
 import 'package:note_taker/utils/custom_widgets/custom_dropdown.dart';
 import 'package:note_taker/utils/custom_widgets/gaps.dart';
 
 import '../../../../utils/custom_widgets/custom_textfield_widget.dart';
 import '../../../../utils/custom_widgets/primary_buttons.dart';
 import '../controller/home_view_controller.dart';
+import '../models/user_notes_list/user_notes_list.dart';
 
 class AddEditNotesView extends GetView<HomeViewController> {
   const AddEditNotesView({super.key});
@@ -19,10 +21,21 @@ class AddEditNotesView extends GetView<HomeViewController> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 35),
         child: PrimaryButton(
-          onTap: () {
-            if (controller.addeditNotesFormKey.currentState!.validate()) {}
+          onTap: () async {
+            if (controller.addeditNotesFormKey.currentState!.validate()) {
+              var newNote = NotesList(
+                id: controller.generateRandomId(),
+                userName: controller.userDetails.value.username,
+                title: controller.titleCTR.value.text,
+                priority: controller.priorityCTR.value.text,
+                details: controller.detailsCTR.value.text,
+                updatedAt: DateTime.now().toString(),
+              );
+
+              await AppPreferences.addNote(newNote);
+            }
           },
-          title: 'Login',
+          title: 'Add',
         ),
       ),
       body: SingleChildScrollView(
@@ -53,9 +66,8 @@ class AddEditNotesView extends GetView<HomeViewController> {
               CustomInputField(
                 controller: controller.detailsCTR.value,
                 title: 'Details',
-                textInputType: TextInputType.name,
+                textInputType: TextInputType.streetAddress,
                 hintText: "Please enter your first name",
-                maxLength: 20,
                 maxLines: 10,
                 onChanged: (value) {
                   controller.userDetails.value.firstname = value;
