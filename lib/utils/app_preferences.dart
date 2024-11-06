@@ -1,6 +1,7 @@
 // import 'dart:convert';
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:note_taker/app/modules/user/models/user_details.dart';
@@ -89,12 +90,64 @@ class AppPreferences {
     }
   }
 
+  static Future addUserNotes(NotesList note) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    log("DATA 1 : ${jsonEncode(note)}");
+
+    String? userName = await getUserName();
+
+    List<NotesList>? notesList = await getAllNotes() ?? [];
+    log("DATA 2 : ${jsonEncode(notesList)}");
+
+    notesList.add(note);
+    List<UserNotesList> userNotesList = await getAllUsersNotes() ?? [];
+
+    log("DATA 3 : ${jsonEncode(userNotesList)}");
+
+    try {
+      for (var element in userNotesList) {
+        if (element.userName == userName) {
+          element.data!.add(note);
+        } else {
+          userNotesList.add(UserNotesList(
+            userName: userName,
+            data: [note],
+          ));
+        }
+      }
+
+      String usersJson =
+          jsonEncode(userNotesList.map((user) => user.toJson()).toList());
+      await prefs.setString(PreferenceKeys.usernotes, usersJson);
+
+      log("DATA 4 : ${jsonEncode(userNotesList)}");
+
+      Get.back();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<List<NotesList>?> getAllNotes() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userNotes = prefs.getString(PreferenceKeys.usernotes);
     if (userNotes != null) {
       List<dynamic> userMaps = jsonDecode(userNotes);
       return userMaps.map((userMap) => NotesList.fromJson(userMap)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<UserNotesList>?> getAllUsersNotes() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userNotes = prefs.getString(PreferenceKeys.usernotes);
+    if (userNotes != null) {
+      List<dynamic> userMaps = jsonDecode(userNotes);
+      return userMaps
+          .map((userMap) => UserNotesList.fromJson(userMap))
+          .toList();
     } else {
       return null;
     }

@@ -63,7 +63,7 @@ class LoginView extends GetView<AuthController> {
                 hintText: "Please enter your password",
                 maxLength: 8,
                 validator: (val) {
-                  if (val!.isEmpty || val.length < 8) {
+                  if (val!.isEmpty || val.length < 6) {
                     return "Please check password!";
                   }
                   return null;

@@ -128,7 +128,7 @@ class SignUpView extends GetView<AuthController> {
                   controller.userDetails.value.password = value;
                 },
                 validator: (val) {
-                  if (val!.isEmpty || val.length < 8) {
+                  if (val!.isEmpty || val.length < 6) {
                     return "Please check password!";
                   }
                   return null;

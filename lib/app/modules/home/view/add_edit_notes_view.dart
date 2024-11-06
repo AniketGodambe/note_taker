@@ -32,7 +32,8 @@ class AddEditNotesView extends GetView<HomeViewController> {
                 updatedAt: DateTime.now().toString(),
               );
 
-              await AppPreferences.addNote(newNote);
+              // await AppPreferences.addNote(newNote);
+              await AppPreferences.addUserNotes(newNote);
             }
           },
           title: 'Add',
