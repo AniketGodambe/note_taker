@@ -63,10 +63,11 @@ class HomeViewController extends GetxController {
     print(jsonEncode(getAllNotes));
     addEditNote.value = false;
   }
+  //hello
 
   int generateRandomId() {
     final random = Random();
-    return random.nextInt(1000000); // Adjust the max value as needed
+    return random.nextInt(1000000);
   }
 
   var data = [
